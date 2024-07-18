@@ -17,6 +17,7 @@ type Roll = Undefined
 type Modifier = Undefined
 type Experience = Undefined
 type Level = Undefined
+type CharacterDead = Undefined
 
 data Alignment = Good | Evil | Neutral
 
@@ -39,11 +40,22 @@ data Character = Character {
   level :: Level
 }
 
-type Combatants = [Character] 
+data Combatants = Combatants {
+  attacker :: Character,
+  defenders :: [Character]
+}
 
-type Attack = Combatants -> Roll -> Combatants
+data AttackStatus
+  = SuccessfulAttack Combatants
+  | UnsuccessfulAttack Combatants
 
-type Damage = Character -> DamageDealt -> Character
+data Result a b
+  = Ok a
+  | Error b
+
+type Attack = Combatants -> Roll -> AttackStatus 
+
+type Damage = Character -> DamageDealt -> Result Character CharacterDead
 
 type ModifyAttribute = AbilityScore -> Modifier
 
