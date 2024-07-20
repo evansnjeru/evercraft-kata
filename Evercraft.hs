@@ -6,15 +6,9 @@ type Name = Undefined
 type ArmorClass = Undefined
 type HitPoints = Undefined
 type AbilityScore = Undefined
-type Strength = Undefined
-type Dexterity =Undefined
-type Constitution = Undefined
-type Wisdom = Undefined
-type Intelligence = Undefined
-type Charisma = Undefined
 type DamageDealt = Undefined
 type Roll = Undefined
-type Modifier = Undefined
+type ModifiedAttributes = Undefined
 type Experience = Undefined
 type Level = Undefined
 type CharacterDead = Undefined
@@ -24,12 +18,12 @@ type SuccessfulAttack = Undefined
 data Alignment = Good | Evil | Neutral
 
 data Abilities = Abilities {
-  strength :: Strength,
-  dexterity :: Dexterity,
-  constitution :: Constitution,
-  wisdom :: Wisdom,
-  intelligence :: Intelligence,
-  charisma :: Charisma
+  strength :: AbilityScore,
+  dexterity :: AbilityScore,
+  constitution :: AbilityScore,
+  wisdom :: AbilityScore,
+  intelligence :: AbilityScore,
+  charisma :: AbilityScore
 }
 
 data Character = Character {
@@ -56,7 +50,7 @@ type Attack = Combatants -> Roll -> AttackResult
 
 type Damage = Character -> DamageDealt -> Either CharacterDead Character
 
-type ModifyAttribute = AbilityScore -> Modifier
+type ModifyAttributes = Attack -> ModifiedAttributes
 
 type GainExperience = Character -> Attack -> Character
 
